@@ -7,3 +7,4 @@ else:
     django_settings_module = "development"
 
 
+print("SECRET_KEY:", os.getenv("SECRET_KEY"))

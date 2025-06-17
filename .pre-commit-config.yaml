@@ -1,5 +1,5 @@
 default_language_version:
-  python: python3.13
+  python: python3.10
 
 exclude: >
   (\.eggs|\.git|\.hg|\.mypy_cache|\.idea|\.pytest_cache|\.tox|\.venv|venv|\.env|env|\.vscode|

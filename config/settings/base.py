@@ -10,10 +10,10 @@ from dotenv import load_dotenv
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 sys.path.append(os.path.join(BASE_DIR, "apps"))
 
-load_dotenv(os.path.join(BASE_DIR, ".env"))
+load_dotenv(os.path.join(BASE_DIR, "env.txt"))
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY")
+SECRET_KEY = os.environ.get("SECRET_KEY", 'django-insecure-3x4mpl3s3cr3tk3y@!o(2)9k')
 
 # Application definition
 BASE_APPS = [
@@ -188,5 +188,4 @@ SMS_LOGIN = os.environ.get("SMS_LOGIN")
 SMS_PASSWORD = os.environ.get("SMS_PASSWORD")
 SMS_SENDER_ID = os.environ.get("SMS_SENDER_ID")
 
-print("SECRET_KEY:", os.environ.get("SECRET_KEY"))
 

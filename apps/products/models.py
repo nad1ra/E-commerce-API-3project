@@ -1,7 +1,7 @@
 from django.db import models
 from django.db.models import UniqueConstraint
-from apps.common.models import BaseModel
-from apps.users.models import User
+from common.models import BaseModel
+from users.models import User
 
 
 class Category(BaseModel):
@@ -14,7 +14,7 @@ class Category(BaseModel):
 
 class Product(models.Model):
     title = models.CharField(max_length=300)
-    price = models.DecimalField(max_length=10, decimal_places=2)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
     thumbnail = models.URLField()  #Products image
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products')
     average_rating = models.FloatField(default=0.0)
