@@ -4,7 +4,7 @@ from products.models import Product
 
 
 class Cart(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name="carts")
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     total = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     items_count = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -12,6 +12,12 @@ class Cart(models.Model):
 
     def __str__(self):
         return f"Cart of {self.user}"
+
+    def update_totals(self):
+        items = self.items.all()
+        self.total = sum(item.subtotal for item in items)
+        self.items_count = sum(item.quantity for item in items)
+        self.save()
 
 
 class CartItem(models.Model):
@@ -26,7 +32,7 @@ class CartItem(models.Model):
     def save(self, *args, **kwargs):
         self.subtotal = self.quantity * self.product.price
         super().save(*args, **kwargs)
-
+        self.cart.update_totals()
         self.cart.update_totals()
 
     def delete(self, *args, **kwargs):

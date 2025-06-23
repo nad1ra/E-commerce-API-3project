@@ -3,13 +3,22 @@ from .models import Category, Product, Like
 
 
 class ProductSerializer(serializers.ModelSerializer):
+    category_name = serializers.ReadOnlyField(source='category.name')
+
     class Meta:
         model = Product
-        fields = ['id', 'title', 'price', 'thumbnail', 'category', 'average_rating', 'likes_count']
+        fields = [
+            'id', 'title', 'price', 'thumbnail', 'category', 'category_name',
+            'average_rating', 'likes_count'
+        ]
 
+class ProductListMinimalSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields = ['id', 'title', 'price', 'likes_count']
 
 class CategorySerializer(serializers.ModelSerializer):
-    products = ProductSerializer(many=True, read_only=True)
+    products = ProductListMinimalSerializer(many=True, read_only=True)
 
     class Meta:
         model = Category
@@ -17,15 +26,12 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 class LikeSerializer(serializers.ModelSerializer):
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+
     class Meta:
         model = Like
-        fields = ['id', 'user', 'product', 'created_at']
+        fields = ['id', 'user', 'created_at']
         read_only_fields = ['id', 'created_at']
 
-    def validate(self, attrs):
-        user = attrs.get('user')
-        product = attrs.get('product')
 
-        if Like.objects.filter(user=user, product=product).exists():
-            raise serializers.ValidationError("You already liked this product.")
-        return attrs
+

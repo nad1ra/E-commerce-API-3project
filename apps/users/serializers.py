@@ -13,6 +13,11 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 User = get_user_model()
 
+class PublicUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'name']
+
 
 class AuthorizeSerializer(serializers.Serializer):
     phone = serializers.CharField(validators=[validate_phone], min_length=12)
