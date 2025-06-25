@@ -36,16 +36,16 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
-    path("default-admin-panel/", admin.site.urls),
+    path("admin/", admin.site.urls),
 ]
 
 urlpatterns += [
-    path("api/v1/users/", include(("users.urls", "users"), "users")),
+    path("api/v1/auth/", include(("users.urls", "users"), "users")),
     path("api/v1/shop/", include(("products.urls", "products"), namespace="products")),
     path("api/v1/shop/", include(("cart.urls", "cart"), namespace="cart")),
     path("api/v1/shop/", include(("orders.urls", "orders"), namespace="orders")),
-    path("api/v1/shop/", include(("apps.profile.urls", "profile"), namespace="profile")),
-    path("api/v1/shop/", include(("apps.reviews.urls", "reviews"), namespace="reviews")),
+    path("api/v1/shop/", include(("profiles.urls", "profiles"), namespace="profiles")),
+    path("api/v1/shop/", include(("reviews.urls", "reviews"), namespace="reviews")),
 ]
 
 

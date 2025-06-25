@@ -5,6 +5,3 @@ if django_settings_module is not None:
     django_settings_module = django_settings_module.split(".")[-1]
 else:
     django_settings_module = "development"
-
-
-print("SECRET_KEY:", os.getenv("SECRET_KEY"))

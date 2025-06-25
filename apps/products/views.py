@@ -1,6 +1,5 @@
 from rest_framework import generics, permissions
-from rest_framework.exceptions import ValidationError
-from .serializers import CategorySerializer, ProductSerializer, LikeSerializer
+from .serializers import CategorySerializer, ProductSerializer
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated

@@ -1,6 +1,6 @@
 from .base import *  # noqa
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["e-commerce-project.midnight-pages.uz", ".vercel.app", "5.182.26.14", "127.0.0.1", "localhost"]
 DEBUG = True
 CORS_ALLOW_ALL_ORIGINS = True
 
